@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88.078" height="98.392" viewBox="0 0 88.078 98.392">
+  <g id="Group_14841" data-name="Group 14841" transform="translate(-765.923 -384.728)">
+    <g id="Group_14504" data-name="Group 14504" transform="translate(732.484 331.184)">
+      <g id="Group_1779" data-name="Group 1779" transform="translate(53.516 53.544)">
+        <rect id="Rectangle_3353" data-name="Rectangle 3353" width="68" height="68" rx="4" transform="translate(0 0)" fill="#fff"/>
+        <path id="Icon_awesome-check" data-name="Icon awesome-check" d="M12.227,30.9.527,19.2a1.8,1.8,0,0,1,0-2.546L3.073,14.1a1.8,1.8,0,0,1,2.546,0L13.5,21.986,30.382,5.1a1.8,1.8,0,0,1,2.546,0L35.473,7.65a1.8,1.8,0,0,1,0,2.546l-20.7,20.7A1.8,1.8,0,0,1,12.227,30.9Z" transform="translate(16 16)" fill="#0d3353"/>
+      </g>
+    </g>
+    <path id="Path_29495" data-name="Path 29495" d="M10.086,55.914c4.862-26.495,31.386-9.837,46.719-21.8,3.932-3.069,6.212-8.73,4.064-13.233" transform="translate(757.804 426.845)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4" stroke-dasharray="6 6 6 6 6 6"/>
+  </g>
+</svg>

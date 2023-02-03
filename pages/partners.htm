@@ -1,0 +1,126 @@
+url = "/partners"
+layout = "default"
+title = "Partners"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[PartnersPage]
+limit = 0
+templates = "template7"
+button_name = "Insider"
+maxItems = 10
+
+[jumbotron]
+jumbotron = "consortium"
+title = 1
+background = "transperant"
+templates = "template1"
+description_limit = 0
+==
+<?php
+use Pensoft\Partners\Models\Partners;
+use Pensoft\Cardprofiles\Models\Profiles;
+
+function onStart(){
+	$this['partners'] =  Partners::where('type', 1)->get();
+	$this['a_partners'] =  Partners::where('type', '!=', 1)->get();
+    $this['members'] = Profiles::where('category_id',  2)->get();
+    $this['a_members'] = Profiles::where('category_id',  2)->get();
+
+}
+
+function onPartners(){
+    $this['partners'] = [];
+    if(post('code')){
+        $this['partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%\'')->where('type', 1)->get();
+    }
+
+    $this['a_partners'] = [];
+    if(post('code')){
+        $this['a_partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%\'')->where('type', '!=', 1)->get();
+    }
+    $this['insider_members'] = new class {
+        public function getIM($id) {
+            return Profiles::where('partner_id', $id)->where('category_id',  2)->get();
+        }
+    };
+}
+
+function onSinglePartner(){
+    $this['partners'] = [];
+    if(post('partner_id')){
+        $this['partners'] =  Partners::where('id', post('partner_id'))->where('type', 1)->get();
+        $this['a_partners'] =  Partners::where('id', post('partner_id'))->where('type', '!=', 1)->get();
+    }
+    $this['insider_members'] = new class {
+        public function getIM($id) {
+            return Profiles::where('partner_id', $id)->where('category_id',  2)->get();
+        }
+    };
+}
+?>
+==
+<div class="container">
+    <div class="tabs">
+        <a class="" href="#other">Partners</a>
+        <a class="" href="#associated">Associated partners</a>
+    </div>
+</div>
+<!--tabs content	-->
+
+        <span class="tooltiptext" id="tooltip">Bulgaria</span>
+
+        <div id="other">
+            <div class="container-fluid partners_background">
+                <div class="svg_map">
+                    {% partial 'components/svg' %}
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-xs-12 partners_list">
+                            {% for partner in partners %}
+                            <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}}, 1);" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(150, auto, {'mode':'crop'})}}"></a>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-5 col-xs-12"></div>
+                    </div>
+
+                </div>
+                <div class="container partners-map-container">
+
+                    <div id="mycomponentpartners" class="row">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="associated">
+            <div class="container-fluid partners_background">
+                <div class="svg_map">
+                    {% partial 'components/associated_svg' %}
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-xs-12 partners_list">
+                            {% for partner in a_partners %}
+                            <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}}, 2);" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(150, auto, {'mode':'crop'})}}"></a>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-5 col-xs-12"></div>
+                    </div>
+
+                </div>
+                <div class="container partners-map-container">
+
+                    <div id="a_mycomponentpartners" class="row">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+

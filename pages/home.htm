@@ -1,0 +1,136 @@
+url = "/"
+layout = "default"
+title = "MAGICA"
+is_hidden = 0
+meta_description = "homepage desc"
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+[article_highlights]
+maxItems = 3
+title = "Latest News"
+baseUrl = "/news"
+templates = "template4"
+thumb_width = 318
+thumb_height = 223
+
+[jumbotron vision]
+jumbotron = "vision"
+title = 1
+background = "#ffffff"
+templates = "template1"
+description_limit = 0
+
+[jumbotron mission]
+jumbotron = "mission"
+title = 1
+background = "#ffffff"
+templates = "template1"
+description_limit = 0
+
+[jumbotron goals]
+jumbotron = "goals"
+title = 1
+background = "#ffffff"
+templates = "template1"
+description_limit = 0
+
+==
+<?php
+
+use Pensoft\Calendar\Models\Entry;
+use Carbon\Carbon;
+function onStart(){
+    //UPCOMING $this['flagship_entries'] = Entry::where('start', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+    $this['flagship_entries'] = Entry::where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+    //UPCOMING $this['other_entries'] = Entry::where('start', '>', Carbon::now())->where('show_on_timeline', false)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+    $this['other_entries'] = Entry::where('show_on_timeline', false)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+}
+
+?>
+==
+<!-- 3 blocks -->
+<div class="container-fluid">
+	<div class="container">
+		<div class="row between-md around-xs">
+			<div class="col-lg-4 col-xs-12 vision">
+				{% component 'vision' %}
+			</div>
+			<div class="col-lg-4 col-xs-12 mission">
+				{% component 'mission' %}
+			</div>
+			<div class="col-lg-4 col-xs-12 goals">
+				{% component 'goals' %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- numbers -->
+<div class="numbers_container">
+
+</div>
+
+
+<!-- latest from news -->
+<div class="container-fluid bg-secondary">
+	{% component 'article_highlights' %}
+    <div class="row">
+        <div class="col-xs-12 center-xs mb-4"><a href="{{'news'|page}}" class="read_more">All news</a> </div>
+    </div>
+</div>
+
+	<div class="container">
+	<div class="row between-xs">
+		<div class="col-lg-6 col-xs-12">
+			<h1 class="base_heading">Flagship Events</h1>
+
+            {% for f_event in flagship_entries %}
+            <a href="{{'events'|page}}/{{f_event.slug}}">
+                <div class="row flg_entry_item">
+                    <div class="col-md-6 col-xs-12">
+                        <span>{{f_event.event_date}}</span>
+                    </div>
+                    <div class="col-md-6 col-xs-12"><span>{{f_event.place}}</span></div>
+                    <div class="col-md-12 col-xs-12">
+                        <h3>{{f_event.title|raw}}</h3>
+                        {% if f_event.cover_image %}
+                            <img src="{{f_event.cover_image.getThumb(177, 171, {'mode': 'crop'})}}">
+                        {% endif %}
+                        {{ f_event.description|length > 450 ? f_event.description|striptags|slice(0, 450) ~ '...' : f_event.description|raw  }}</div>
+                </div>
+            </a>
+            {% endfor %}
+		</div>
+
+        <div class="col-lg-6 col-xs-12">
+            <h1 class="base_heading">Other Events</h1>
+                <div class="other_events_container">
+                    {% for event in other_entries %}
+
+                        <div class="row entry_item">
+                            <div class="col-md-6 col-xs-12">
+                                <span>{{event.event_date}}</span>
+                            </div>
+                            <div class="col-md-6 col-xs-12"><span>{{event.place}}</span></div>
+                            <div class="col-md-12 col-xs-12">
+                                <h3>{{event.title}}</h3>
+                                <a href="{{'events'|page}}/{{event.slug}}" class="learn_more">Learn more</a>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+
+            <h1 class="base_heading">Follow MAGICA</h1>
+            <div class="twitter-widget">
+                <a class="twitter-timeline" href="https://twitter.com/SELINAHorizonEU?ref_src=twsrc%5Etfw">Tweets by @SELINAHorizonEU</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+
+        </div>
+
+	</div>
+
+</div>

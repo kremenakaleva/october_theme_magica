@@ -1,0 +1,117 @@
+url = "/about"
+layout = "default"
+title = "About"
+is_hidden = 0
+meta_description = "about page"
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+[jumbotron who]
+jumbotron = "who-we-are"
+title = 1
+background = "#ffffff"
+templates = "template1"
+description_limit = 0
+
+[jumbotron about_who_image]
+jumbotron = "who-we-are-image"
+title = 0
+background = "unset"
+templates = "template1"
+description_limit = 0
+
+[jumbotron what]
+jumbotron = "what-we-do"
+title = 1
+background = "#ffffff"
+templates = "template1"
+description_limit = 0
+
+[jumbotron about_what_image]
+jumbotron = "what-we-do-image"
+title = 0
+background = "unset"
+templates = "template1"
+description_limit = 0
+
+[siteSearchInclude]
+
+[jumbotron wp_image]
+jumbotron = "work-packages-image"
+background = "unset"
+templates = "template1"
+description_limit = 0
+==
+<?php
+use Pensoft\Accordions\Models\Item;
+
+function onStart(){
+    $this['accorions'] = Item::where('category_id', 1)->get();
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+<div class="container-fluid timeline_container left">
+    <div class="blue_line"></div>
+    <div class="container about">
+        <div class="row top-xs mt-4">
+            <div class="col-md-6 col-xs-12">
+                <div class="about-who">
+
+                    {% component 'who' %}
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="about-who-image">
+                    {% component 'about_who_image' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid timeline_container right">
+    <div class="blue_line"></div>
+    <div class="container about">
+        <div class="row top-xs">
+            <div class="col-md-6 col-xs-12">
+                <div class="about-what-image">
+                    {% component 'about_what_image' %}
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="about-what">
+
+                    {% component 'what' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+        <div class="row top-xs">
+            <div class="col-md-12 col-xs-12">
+                <div class="container-fluid " style="background-color:unset;">
+                    <div class="container work_packages">
+                        <h2>Work Packages</h2>
+                        <div class="row flip_cards_container">
+                        {% for key, item in accorions %}
+                            <div class="col-md col-xs-12">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front"><p><span>{{item.prefix | uppercase}}</span> {{item.title}}</p></div>
+                                        <div class="flip-card-back">{{item.body|raw}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    {% component 'wp_image' %}
+</div>
