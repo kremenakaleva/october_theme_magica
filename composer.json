@@ -1,8 +1,8 @@
 {
-    "name": "october/pensoft-selina-theme",
+    "name": "october/pensoft-magica-theme",
     "type": "october-theme",
-    "description": "Pensoft Selina October CMS theme",
-    "keywords": ["october", "cms", "selina", "theme"],
+    "description": "Pensoft MAGICA October CMS theme",
+    "keywords": ["october", "cms", "magica", "theme"],
     "authors": [
         {
             "name": "Kremena Kaleva",
