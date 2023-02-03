@@ -269,7 +269,8 @@ nav:not(.navbar){
             font-size: 22px;
             line-height: 1.4em;
             font-weight: bold;
-            font-family: "Clear Sans";
+            font-family: "Clear Sans"!important;
+            min-height: 155px!important;
         }
         .text-published{
             font-size: 18px;
@@ -301,6 +302,8 @@ nav:not(.navbar){
 
 .home .news-item{
     margin-bottom: 30px;
+    flex-basis: 30%;
+    max-width: 30%;
 
     .news_column{
         width: 386px;
