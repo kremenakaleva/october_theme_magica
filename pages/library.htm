@@ -169,7 +169,7 @@ $this['total_file_size'] = $this['total_file_size_bites'];
             <button class="btn searchLibrary btn-link text-grey-search-btn" type="submit"></button>
         </form>
     </div>
-
+    {% if record.count %}
     <div class='library-items' id="partialLibraries">
         {% for record in data %}
 
@@ -230,6 +230,11 @@ $this['total_file_size'] = $this['total_file_size_bites'];
         </div>
 
     </div>
+    {% else %}
+    <div class="row container">
+    Our first publication will be available soon.
+    </div>
+    {% endif %}
 
 
 

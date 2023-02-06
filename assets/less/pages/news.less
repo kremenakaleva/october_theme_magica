@@ -155,6 +155,10 @@ nav:not(.navbar){
         display: flex;
         flex-direction: column;
         justify-content: start;
+
+        &:hover{
+            opacity: 0.7!important;
+        }
         img{
             width: 393px;
             height: 223px;
@@ -210,6 +214,9 @@ nav:not(.navbar){
                         min-height: 620px
                     });
                 }
+            }
+            a .body{
+                color: @default-color;
             }
         }
     }

@@ -76,11 +76,11 @@ function onSinglePartner(){
                 <div class="svg_map">
                     {% partial 'components/svg' %}
                 </div>
-                <div class="container">
+                <div class="container" style="min-height: 450px;">
                     <div class="row">
                         <div class="col-md-7 col-xs-12 partners_list">
                             {% for partner in partners %}
-                            <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}}, 1);" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(150, auto, {'mode':'crop'})}}"></a>
+                            <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}}, 1);" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(94, auto, {'mode':'crop'})}}"></a>
                             {% endfor %}
                         </div>
                         <div class="col-md-5 col-xs-12"></div>
@@ -102,11 +102,11 @@ function onSinglePartner(){
                 <div class="svg_map">
                     {% partial 'components/associated_svg' %}
                 </div>
-                <div class="container">
+                <div class="container" style="min-height: 450px;">
                     <div class="row">
                         <div class="col-md-7 col-xs-12 partners_list">
                             {% for partner in a_partners %}
-                            <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}}, 2);" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(150, auto, {'mode':'crop'})}}"></a>
+                            <a class="parener_logo" onclick="onCustomSinglePartner({{partner.id}}, 2);" title="{{partner.instituion}}"><img class="partner_cover" src="{{partner.cover.thumb(94, auto, {'mode':'crop'})}}"></a>
                             {% endfor %}
                         </div>
                         <div class="col-md-5 col-xs-12"></div>

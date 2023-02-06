@@ -84,6 +84,7 @@ function onStart(){
 	<div class="container">
 	<div class="row between-xs">
 		<div class="col-lg-6 col-xs-12">
+            {% if flagship_entries.count %}
 			<h1 class="base_heading">Flagship Events</h1>
 
             {% for f_event in flagship_entries %}
@@ -102,9 +103,11 @@ function onStart(){
                 </div>
             </a>
             {% endfor %}
+            {% endif %}
 		</div>
 
         <div class="col-lg-6 col-xs-12">
+            {% if other_entries.count %}
             <h1 class="base_heading">Other Events</h1>
                 <div class="other_events_container">
                     {% for event in other_entries %}
@@ -122,10 +125,10 @@ function onStart(){
 
                     {% endfor %}
                 </div>
-
+            {% endif %}
             <h1 class="base_heading">Follow MAGICA</h1>
             <div class="twitter-widget">
-                <a class="twitter-timeline" href="https://twitter.com/SELINAHorizonEU?ref_src=twsrc%5Etfw">Tweets by @SELINAHorizonEU</a>
+                <a class="twitter-timeline" href="https://twitter.com/jpiclimate?ref_src=twsrc%5Etfw">Tweets by @jpiclimate</a>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
 

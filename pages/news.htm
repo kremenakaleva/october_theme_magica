@@ -117,14 +117,10 @@ $this['related'] = $related;
             <div class="row newslist">
                 {% for highlight in records %}
                 <div class="col-xs-12 col-md-4 news-item">
+                    <a href="{{'news'|page}}/{{highlight.slug}}">
                     <div class="row news_column">
-                        {% if highlight.href %}
-                        <a class="news-image col-xs-12 center-xs" href="{{highlight.href}}">
-                            {% endif %}
-                            <img class="news-img-top" src="{{ highlight.cover|crop_image|resize(393, 223, {'mode': 'crop'}) }}">
-                            {% if highlight.href %}
-                        </a>
-                        {%endif %}
+                        <img class="news-img-top" src="{{ highlight.cover|crop_image|resize(393, 223, {'mode': 'crop'}) }}">
+
                         <div class="news-container col-xs-12">
                             <div class="text-published">{{highlight.pretty_published_at}}</div>
                             <div class="wrapper">
@@ -136,6 +132,7 @@ $this['related'] = $related;
                             <a href="{{'news'|page}}/{{highlight.slug}}" class="read_more">Learn more</a>
                         </div>
                     </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
