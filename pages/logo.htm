@@ -58,6 +58,7 @@ return Redirect::to('/media-center/logo');
     {% set detailsKeyColumn = mediaLogosList.detailsKeyColumn %}
     {% set detailsUrlParameter = mediaLogosList.detailsUrlParameter %}
 
+    {% if records.count %}
     <div class="row card-container-row mb-4 start-xs">
         {% for record in records %}
         {# Use spaceless tag to remove spaces inside the A tag. #}
@@ -87,4 +88,5 @@ return Redirect::to('/media-center/logo');
         {{ noRecordsMessage }}
         {% endfor %}
     </div>
+    {% endif %}
 </div>
