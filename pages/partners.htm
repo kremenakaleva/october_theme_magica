@@ -32,14 +32,21 @@ function onStart(){
 
 function onPartners(){
     $this['partners'] = [];
-    if(post('code')){
-        $this['partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%\'')->where('type', 1)->get();
-    }
-
     $this['a_partners'] = [];
+
+if(post('param') == 2){
     if(post('code')){
         $this['a_partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%\'')->where('type', '!=', 1)->get();
     }
+}else{
+    if(post('code')){
+        $this['partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%\'')->where('type', 1)->get();
+    }
+}
+
+
+
+
     $this['insider_members'] = new class {
         public function getIM($id) {
             return Profiles::where('partner_id', $id)->where('category_id',  2)->get();
