@@ -4,7 +4,6 @@ title = "News"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
-
 ==
 <?php
 use Pensoft\Articles\Models\Article;
@@ -129,7 +128,7 @@ $this['related'] = $related;
                                 <div class="news-title">
                                     <h3 class="card-title">{{ highlight.title|length > 200 ? highlight.title|striptags|slice(0, 200) ~ '...' : highlight.title|raw  }}</h3>
                                 </div>
-                                <div class="body mb-2">{{ highlight.content|length > 200 ? highlight.content|striptags|slice(0, 200) ~ '...' : highlight.content|raw  }}</div>
+                                <div class="body mb-2">{{ highlight.content|length > 200 ? highlight.content|replace({'&nbsp;': '', '.': '. '})|striptags|slice(0, 200) ~ '...' : highlight.content|raw|replace({'&nbsp;': '', '.': '. '})  }}</div>
                             </div>
                             <a href="{{'news'|page}}/{{highlight.slug}}" class="read_more">Learn more</a>
                         </div>

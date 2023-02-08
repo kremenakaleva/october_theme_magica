@@ -347,11 +347,14 @@
         background-color: transparent;
         width: 290px;
         max-width: 98%;
-        height: 405px;
+        height: 455px;
         margin-bottom: 100px;
         perspective: 1000px; /* Remove this if you don't want the 3D effect */
         color: @white-color;
         text-align: center;
+        .breakpoint-laptop-down({
+            height: 555px;
+        });
         .breakpoint-large-down({
             margin: 30px auto;
         });

@@ -273,7 +273,7 @@ $(document).ready(function() {
         var countParagraphs = $(this).find('p').length;
         if(countParagraphs > 1) {
             $(this).find('p').first().append('<div class="dorsal">Read more</div>');
-            $(this).find('p:not(:first)').wrapAll("<div class='toogle-contact-paragraphs'></div>")
+            $(this).find('p:not(:first), ul').wrapAll("<div class='toogle-contact-paragraphs'></div>")
         }
     });
 
@@ -758,17 +758,23 @@ function handleCustomSVGMapMouseMove(event) {
 }
 
 
-function onMapCustomPartners(code) {
+function onMapCustomPartners(code, pParam) {
 		$('.partner-item').removeClass('active_partner');
+        if(pParam == 2){
+            var divaID = '#a_mycomponentpartners';
+        }else{
+            var divaID = '#mycomponentpartners';
+        }
 		$.request('onPartners', {
-			update: { 'components/partners_list': '#mycomponentpartners',
+			update: { 'components/partners_list': divaID,
 			},
 			data: {
-                code: code
+                code: code,
+                param: pParam
 			},
 		}).then(response => {
             $('html, body').animate({
-                scrollTop: $("#mycomponentpartners").offset().top - 200
+                scrollTop: $(divaID).offset().top - 200
             }, 1000);
             var tooltip = document.getElementById("tooltip");
             tooltip.classList.remove("active");

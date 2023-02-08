@@ -122,9 +122,29 @@
 }
 
 .logo{
+    .col-md-3:nth-last-of-type(3),
+    .col-md-3:nth-last-of-type(4),
+    .col-md-3:nth-last-of-type(1),
+    .col-md-3:nth-last-of-type(2){
+        .logo_container{
+            background: #505050;
+            
+        }
+
+    }
+
+    .col-md-3:nth-last-of-type(5),
+    .col-md-3:nth-last-of-type(6),
+    .col-md-3:nth-last-of-type(7){
+        .logo_container{
+            background: #EEF0F1;
+            
+        }
+
+    }
 
     .logo_container{
-        background: @secondary-color;
+        
         img{
             height: 135px;
             object-fit: contain;
