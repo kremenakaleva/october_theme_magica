@@ -65,7 +65,7 @@ if($this['entry']['cover_image']){
 
 $this['page_url'] = $this->pageUrl('');
 
-	$this['entries'] = Entry::where('show_on_timeline', false)->orderBy('start', 'asc')->paginate(15);
+	$this['entries'] = Entry::orderBy('start', 'asc')->paginate(15);
     $this['slug'] = $this->param('slug');
 
 
