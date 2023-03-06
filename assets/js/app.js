@@ -418,8 +418,8 @@ function appendSignOut() {
 function appendSearchAndSocialMedia(){
 	var liSearch = '<li class="nav-item search_field"><a href=\"javascript: void(0);\" onclick=\"showSearchForm();\"></a></li>';
 	var liSocial = '<li class="nav-item social">' +
-        '<a href=\"https://twitter.com/Know_Center\" target=\"_blank\" class=\"pr p-twitter medium\" target=\"_blank\"></a>' +
-        '<a href=\"https://www.linkedin.com/company/know-center/\" target=\"_blank\" class=\"pr p-linkedin medium\" target=\"_blank\"></a></li>';
+        '<a href=\"https://twitter.com/jpiclimate\" target=\"_blank\" class=\"pr p-twitter medium\" target=\"_blank\"></a>' +
+        '<a href=\"https://www.linkedin.com/groups/5011791/\" target=\"_blank\" class=\"pr p-linkedin medium\" target=\"_blank\"></a></li>';
 	var menu = $('#menuToggle');
 	menu.find('>ul').append(liSearch).append(liSocial);
 }
