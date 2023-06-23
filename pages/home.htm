@@ -36,9 +36,13 @@ background = "#ffffff"
 templates = "template1"
 description_limit = 0
 
+[jumbotron image_video]
+jumbotron = "homepage-banner"
+background = "transperant"
+templates = "template1"
+description_limit = 0
 ==
 <?php
-
 use Pensoft\Calendar\Models\Entry;
 use Carbon\Carbon;
 function onStart(){
@@ -47,9 +51,11 @@ function onStart(){
     //UPCOMING $this['other_entries'] = Entry::where('start', '>', Carbon::now())->where('show_on_timeline', false)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
     $this['other_entries'] = Entry::where('show_on_timeline', false)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
 }
-
 ?>
 ==
+<div class="homepage_banner">
+    {% component 'image_video' %}
+</div>
 <!-- 3 blocks -->
 <div class="container-fluid">
 	<div class="container">

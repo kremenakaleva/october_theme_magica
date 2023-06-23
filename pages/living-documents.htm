@@ -8,6 +8,12 @@ allowedUserGroups[] = "internal-users"
 allowedUserGroups[] = "registered"
 allowedUserGroups[] = "guest"
 redirect = "home"
+
+[jumbotron living_docs_text]
+jumbotron = "living-documents"
+background = "transperant"
+templates = "template1"
+description_limit = 0
 ==
 {% component 'session' %}
 <div class="container">
@@ -25,8 +31,18 @@ redirect = "home"
 			<h1 class="base_heading inner-page">Working Documents (live)</h1>
 		</div>
 
+<div class="col-xs-12 mt-2">
 
-        <div class="col-xs-12 work_packages">
+
+			<p><iframe src="https://drive.google.com/embeddedfolderview?id=1xin7npfV4kfz8ywswKGiQOUfer8sSLTy#list" width="100%" height="352" frameborder="0" marginheight="0" marginwidth="0"></iframe></p>
+
+			{% component 'living_docs_text' %}
+
+			
+		</div>
+
+
+        <!--<div class="col-xs-12 work_packages">
 
             <div class="accordion-border">
                 <div class="row middle-xs accordion-toggle">
@@ -39,7 +55,7 @@ redirect = "home"
 
 
 
-        </div>
+        </div>-->
 
 
 
