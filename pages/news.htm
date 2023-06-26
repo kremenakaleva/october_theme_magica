@@ -4,6 +4,9 @@ title = "News"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
+
+[gallery]
+
 ==
 <?php
 use Pensoft\Articles\Models\Article;
@@ -82,6 +85,9 @@ $this['related'] = $related;
                 <div class="content">
                     {{article.content|raw}}
                 </div>
+
+                {% component 'gallery' %}
+
             </div>
         </div>
         <div class="col-xs-12 col-md-5">
