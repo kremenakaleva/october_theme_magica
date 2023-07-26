@@ -132,7 +132,7 @@ $this['related'] = $related;
                             <div class="text-published">{{highlight.pretty_published_at}}</div>
                             <div class="wrapper">
                                 <div class="news-title">
-                                    <h3 class="card-title">{{ highlight.title|length > 200 ? highlight.title|striptags|slice(0, 200) ~ '...' : highlight.title|raw  }}</h3>
+                                    <h3 class="card-title">{{ highlight.title|length > 200 ? highlight.title|striptags|slice(0, 200)|replace({"&nbsp;": " ", ".": ". "}) ~ '...' : highlight.title|raw  }}</h3>
                                 </div>
                                 <div class="body mb-2">{{ highlight.content|length > 200 ? highlight.content|replace({'&nbsp;': '', '.': '. '})|striptags|slice(0, 200) ~ '...' : highlight.content|raw|replace({'&nbsp;': '', '.': '. '})  }}</div>
                             </div>
