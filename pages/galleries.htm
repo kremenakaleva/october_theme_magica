@@ -5,125 +5,14 @@ is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
 
+[galleries]
 
 ==
-<?php
-use Pensoft\Media\Models\Galleries;
-
-function urlencode($string){
-    return trim(urlencode($string));
-}
-function onStart()
-{
-$this['records'] = Galleries::get();
-
-    $this['gallery'] = Pensoft\Media\Models\Galleries::where('id', $this->param('id'))->first();
-    if($this['gallery']){
-
-        $this['is_detail_page'] = $this['gallery'] ? true : false;
-
-    }
-}
-?>
 ==
+
 <div class="container">
-	{% if is_detail_page %}
-    <div class="row single-news-item">
-        <div class="col-xs-12 col-md-7">
-            <div class="news_content_wrapper">
-                <div class="news-title">
-                    <h1 class="single-new-title">{{gallery.name}}</h1>
-                </div>
-
-                <div class="gallery_container">
-                    {% for key1, value1 in gallery.images %}
-                    <div class="mySlides">
-                        <img class="img-fluid" src="{{ value1.thumb(auto, 350, {'mode':'crop'})}}" alt="{{ value1.title|default('') }}">
-                    </div>
-
-
-                    {% endfor %}
-
-                    <a class="prev" onclick="plusSlides(-1)">❮</a>
-                    <a class="next" onclick="plusSlides(1)">❯</a>
-
-                    <div class="caption-container">
-                        <p id="caption"></p>
-                    </div>
-
-                    <div class="row">
-                        {% for key2, value2 in gallery.images %}
-                        <div class="column">
-                            <img class="demo cursor" src="{{ value2.thumb(155, 103, {'mode':'crop'})}}" style="width:100%" onclick="currentSlide(({{key2}} + 1))" alt="{{ value2.title|default('') }}">
-                        </div>
-
-
-
-                        {% endfor %}
-
-                    </div>
-                </div>
-
-                <script>
-                    let slideIndex = 1;
-                    showSlides(slideIndex);
-
-                    function plusSlides(n) {
-                        showSlides(slideIndex += n);
-                    }
-
-                    function currentSlide(n) {
-                        showSlides(slideIndex = n);
-                    }
-
-                    function showSlides(n) {
-                        let i;
-                        let slides = $(".mySlides");
-                        console.log(slides)
-                        let dots = document.getElementsByClassName("demo");
-                        let captionText = document.getElementById("caption");
-                        if (n > slides.length) {slideIndex = 1}
-                        if (n < 1) {slideIndex = slides.length}
-                        for (i = 0; i < slides.length; i++) {
-                            slides[i].style.display = "none";
-                        }
-                        for (i = 0; i < dots.length; i++) {
-                            dots[i].className = dots[i].className.replace(" active", "");
-                        }
-                        slides[slideIndex-1].style.display = "block";
-                        dots[slideIndex-1].className += " active";
-                        captionText.innerHTML = dots[slideIndex-1].alt;
-                    }
-                </script>
-
-            </div>
-        </div>
-
-    </div>
-	{% else %}
-
-            <div class="row newslist">
-                {% for gal in records %}
-                <div class="col-xs-12 col-md-4 news-item">
-                    <a href="{{'galleries'|page}}/{{gal.id}}">
-                    <div class="row news_column">
-                        <img class="news-img-top" src="{{gal.images[0].getThumb(393, 223, {'mode': 'crop'})}}" title="{{ gal.name }}" alt="{{ gal.name }}">
-
-                        <div class="news-container col-xs-12">
-                            <div class="wrapper">
-                                <div class="news-title">
-                                    <h3 class="card-title">{{ gal.name|length > 200 ? gal.name|striptags|slice(0, 200) ~ '...' : gal.name|raw  }}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-            <div class="row container">
-                {{ records.render|raw }}
-            </div>
-
-	{% endif %}
+    {% component 'galleries' %}
+    <div class="container align-center text-center">
+        <a href="/media-center/galleries"> <- Back to galleries</a>
+     </div>
 </div>

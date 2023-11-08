@@ -5,6 +5,7 @@ is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
 
+[event_galleries]
 ==
 <?php
 use Pensoft\Calendar\Models\Entry;
@@ -145,9 +146,9 @@ $this['page_url'] = $this->pageUrl('');
                 <img class="content left" src="{{ entry.cover_image|crop_image|resize(673, auto, { mode: 'crop' }) }}" />
             </div>
             {% endif %}
-
-
-
+        </div>
+        <div class="row d-flex align-center">
+            {% component 'event_galleries' %}
         </div>
     </div>
 </div>
