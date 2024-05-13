@@ -1,6 +1,6 @@
-title = "Search"
 url = "/search"
 layout = "default"
+title = "Search"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -10,12 +10,13 @@ resultsPerPage = 30
 showProviderBadge = 1
 noResultsMessage = "Your search returned no results."
 visitPageMessage = "Visit page"
+minQueryLength = 0
 ==
 <div class="container about">
     <div class="row">
         <div class="col-xs">
 
-            <h1 class="base_heading inner-page">Search results for {{ searchResults.query }}</h1>
+            <h1 class="base_heading inner-page">{{searchResults.resultCollection.count}} item(s) matching "{{ searchResults.query }}"</h1>
 
             {% component 'searchResults' %}
         </div>
