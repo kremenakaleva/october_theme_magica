@@ -48,9 +48,9 @@ use Pensoft\Calendar\Models\Entry;
 use Carbon\Carbon;
 function onStart(){
     //UPCOMING $this['flagship_entries'] = Entry::where('start', '>', Carbon::now())->where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
-    $this['flagship_entries'] = Entry::where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+    $this['flagship_entries'] = Entry::where('show_on_timeline', true)->where('is_internal', false)->orderBy('start', 'desc')->take(3)->get();
     //UPCOMING $this['other_entries'] = Entry::where('start', '>', Carbon::now())->where('show_on_timeline', false)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
-    $this['other_entries'] = Entry::where('show_on_timeline', false)->where('is_internal', false)->orderBy('start', 'asc')->take(3)->get();
+    $this['other_entries'] = Entry::where('show_on_timeline', false)->where('is_internal', false)->orderBy('start', 'desc')->take(3)->get();
 }
 ?>
 ==

@@ -121,22 +121,12 @@ $this['page_url'] = $this->pageUrl('');
                     <div class="col-lg col-xs-12 center-xs end-lg">
                         {% if entry.url %}
                         <a href="{{entry.url}}" class="read_more" target="_blank">Visit Website</a>
-                        {% endif %}</div>
+                        {% endif %}
+                    </div>
                 </div>
 
                 <div class="content">
                     {{entry.description|raw}}
-                </div>
-                <div class="row share_container middle-xs">
-                    <div class="col-md-1 col-xs-3 start-xs">Share</div>
-                    <div class="col-md-10 col-xs-8">
-                        <a href="http://twitter.com/share?text={{entry.title}}&url={{page_url}}" target="_blank" class="btn p-primary pr p-twitter normal"></a>
-
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" class="btn pr p-primary p-facebook normal"></a>
-
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank" class="btn pr p-primary p-linkedin normal"></a>
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -150,8 +140,69 @@ $this['page_url'] = $this->pageUrl('');
         <div class="row d-flex align-center">
             {% component 'event_galleries' %}
         </div>
+        <div class="row share_container middle-xs">
+            <div class="col-md-6 col-xs-3 start-xs">Share</div>
+            <div class="col-md-12 col-xs-12">
+                <a href="http://twitter.com/share?text={{entry.title}}&url={{page_url}}" target="_blank" class="btn p-primary pr p-twitter normal"></a>
+
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" class="btn pr p-primary p-facebook normal"></a>
+
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank" class="btn pr p-primary p-linkedin normal"></a>
+
+            </div>
+        </div>
     </div>
 </div>
 {% endif %}
 
 {% endif %}
+
+<script>
+    // Object to keep track of the current slide index for each gallery
+    var slideIndex = {};
+
+    // Function to initialize the slide index for all galleries
+    function initGalleries() {
+        $('.gallery_container').each(function() {
+            var id = this.id.split('_')[1];
+            slideIndex[id] = 1;
+            showSlides(1, id); // Show the first slide for each gallery
+        });
+    }
+
+    // Function to increment/decrement the current slide index and display the slide
+    function plusSlides(n, galleryId) {
+        showSlides(slideIndex[galleryId] += n, galleryId);
+    }
+
+    // Function to display the current slide based on the thumbnail clicked
+    function currentSlide(n, galleryId) {
+        showSlides(slideIndex[galleryId] = n, galleryId);
+    }
+
+    // Main function to display slides
+    function showSlides(n, galleryId) {
+        var i;
+        var gallery = $("#gallery_" + galleryId);
+        var slides = gallery.find(".mySlides_" + galleryId);
+        var dots = gallery.find(".demo_" + galleryId);
+        var captionText = gallery.find("#caption_" + galleryId);
+
+        if (n > slides.length) { slideIndex[galleryId] = 1 }
+        if (n < 1) { slideIndex[galleryId] = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex[galleryId]-1].style.display = "block";  
+        dots[slideIndex[galleryId]-1].className += " active";
+        captionText.html(dots[slideIndex[galleryId]-1].alt);
+    }
+
+    // Initialize galleries when the document is ready
+    $(document).ready(function() {
+        initGalleries();
+    });
+</script>
