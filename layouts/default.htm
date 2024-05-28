@@ -49,6 +49,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     {% if this.page.id == 'news' and is_detail_page %}
         {% component 'metaList' includePageMeta=false %}
+    {% elseif this.page.id == 'events' and is_detail_page %}
+        {% component 'metaList' includePageMeta=false %}
     {% else %}
         {% component 'metaList' %}
     {% endif %}

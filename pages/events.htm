@@ -6,11 +6,13 @@ robot_index = "index"
 robot_follow = "follow"
 
 [event_galleries]
+
 ==
 <?php
 use Pensoft\Calendar\Models\Entry;
 
 function onStart(){
+    $this['is_detail_page'] = false;
 
     if($this->param('slug')){
 			$this['entry'] =  Entry::select(
@@ -33,6 +35,8 @@ function onStart(){
 
 			)->where('slug', $this->param('slug'))->first();
 
+            $this['is_detail_page'] = true;
+
 
             $this['attendees'] = new class {
                 public function getIM($id) {
@@ -47,23 +51,30 @@ function onStart(){
             //    }
             //};
 
-\BennoThommo\Meta\Meta::set('twitter:card', 'summary_large_image');
-\BennoThommo\Meta\Meta::set('twitter:title', $this['entry']['title']);
-\BennoThommo\Meta\Meta::set('twitter:description', str_limit(Html::strip($this['entry']['description']), 255));
-\BennoThommo\Meta\Meta::set('og:title', $this['entry']['title']);
-\BennoThommo\Meta\Meta::set('og:description', str_limit(Html::strip($this['entry']['description']), 255) );
-\BennoThommo\Meta\Meta::set('og:type', 'article');
-\BennoThommo\Meta\Meta::set('og:url', $this->pageUrl(''));
-if($this['entry']['cover_image']){
-    \BennoThommo\Meta\Meta::set('twitter:image', $this['entry']['cover_image']->getThumb(600, null, ['mode' => 'auto']));
+            $titleWords = explode(' ', $this['entry']['title']);
+            $seoKeywords = $this['entry']['meta_keywords'] ?: implode(',', $titleWords);
 
-\BennoThommo\Meta\Meta::set('og:image', $this['entry']['cover_image']->getThumb(600, 314, ['mode' => 'crop']));
-\BennoThommo\Meta\Meta::set('og:image:width', 600);
-\BennoThommo\Meta\Meta::set('og:image:height', 314);
+            \BennoThommo\Meta\Meta::set('title', $this['entry']['title']);
+            \BennoThommo\Meta\Meta::set('description', str_limit(Html::strip($this['entry']['description']), 255) );
+            \BennoThommo\Meta\Meta::set('keywords', $seoKeywords );
+
+            \BennoThommo\Meta\Meta::set('twitter:card', 'summary_large_image');
+            \BennoThommo\Meta\Meta::set('twitter:title', $this['entry']['title']);
+            \BennoThommo\Meta\Meta::set('twitter:description', str_limit(Html::strip($this['entry']['description']), 255));
+            \BennoThommo\Meta\Meta::set('og:title', $this['entry']['title']);
+            \BennoThommo\Meta\Meta::set('og:description', str_limit(Html::strip($this['entry']['description']), 255) );
+            \BennoThommo\Meta\Meta::set('og:type', 'article');
+            \BennoThommo\Meta\Meta::set('og:url', $this->pageUrl(''));
+
+            if($this['entry']['cover_image']){
+                \BennoThommo\Meta\Meta::set('twitter:image', $this['entry']['cover_image']->getThumb(600, null, ['mode' => 'auto']));
+
+            \BennoThommo\Meta\Meta::set('og:image', $this['entry']['cover_image']->getThumb(600, 314, ['mode' => 'crop']));
+            \BennoThommo\Meta\Meta::set('og:image:width', 600);
+            \BennoThommo\Meta\Meta::set('og:image:height', 314);
+            }
+
 }
-
-	}
-
 $this['page_url'] = $this->pageUrl('');
 
 	$this['entries'] = Entry::orderBy('start', 'desc')->paginate(15);
