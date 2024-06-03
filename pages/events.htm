@@ -52,10 +52,13 @@ function onStart(){
             //};
 
             $titleWords = explode(' ', $this['entry']['title']);
+            
             $seoKeywords = $this['entry']['meta_keywords'] ?: implode(',', $titleWords);
+            $seoDescription = str_limit(Html::strip($this['entry']['meta_description']), 255) ?: str_limit(Html::strip($this['entry']['description']), 255);
+            $seoTitle = $this['entry']['meta_title'] ?: $this['entry']['title'];
 
-            \BennoThommo\Meta\Meta::set('title', $this['entry']['title']);
-            \BennoThommo\Meta\Meta::set('description', str_limit(Html::strip($this['entry']['description']), 255) );
+            \BennoThommo\Meta\Meta::set('title', $seoTitle);
+            \BennoThommo\Meta\Meta::set('description', $seoDescription);
             \BennoThommo\Meta\Meta::set('keywords', $seoKeywords );
 
             \BennoThommo\Meta\Meta::set('twitter:card', 'summary_large_image');
@@ -75,6 +78,7 @@ function onStart(){
             }
 
 }
+
 $this['page_url'] = $this->pageUrl('');
 
 	$this['entries'] = Entry::orderBy('start', 'desc')->paginate(15);

@@ -27,9 +27,9 @@ $this['records'] = Article::news()->where('published_at', '<=', 'now()')->where(
             $this['encoded_title'] = urlencode($this['article']['title']);
             $this['slug'] = $this['article']['slug'];
             
-            $seoTitle = $this['article']['title'];
+            $seoTitle = $this['article']['meta_title'] ?: $this['article']['title'];
             $seoKeywords = $this['article']['meta_keywords'] ?: $this['article']['keywords'];
-            $seoDescription = str_limit(Html::strip($this['article']['content']), 255);
+            $seoDescription = str_limit(Html::strip($this['article']['meta_description']), 255) ?: str_limit(Html::strip($this['article']['content']), 255);
     
             if (class_exists('\BennoThommo\Meta\Meta')) {
                 if($seoTitle) {
